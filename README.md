@@ -4,7 +4,9 @@ A list of IPs that my own system gathered running https://github.com/DominicTWHV
 # To use:
 
 Clone the repo at https://github.com/DominicTWHV/Anti_Server_Scanner
+
 Make sure you have iptables and ipset installed on your system.
+
 You do NOT need a proxy server to use the set, however, it is required if you wish to use the main script (https://github.com/DominicTWHV/Anti_Server_Scanner)
 
 ```bash
