@@ -9,7 +9,7 @@ You do NOT need a proxy server to use the set, however, it is required if you wi
 git clone https://github.com/DominicTWHV/MCIPBlocklist.git
 cd MCIPBlocklist
 sudo chmod +x *.sh
-sudo ./pipeline.sh
+./pipeline.sh
 ```
 
 The pipeline script will perform the rest of the setup.
