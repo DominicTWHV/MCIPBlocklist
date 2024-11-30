@@ -1,5 +1,5 @@
 # MCIPBlocklist
-A list of IPs that my own system gathered running https://github.com/DominicTWHV/Anti_Server_Scanner
+A list of IPs that my own system gathered running `Anti_Server_Scanner`
 
 # To use:
 
@@ -7,7 +7,7 @@ Clone the repo at https://github.com/DominicTWHV/Anti_Server_Scanner
 
 Make sure you have iptables and ipset installed on your system.
 
-You do NOT need a proxy server to use the set, however, it is required if you wish to use the main script (https://github.com/DominicTWHV/Anti_Server_Scanner)
+You do NOT need a proxy server to use the set, however, it is required if you wish to use the main script at `Anti_Server_Scanner`
 
 ```bash
 git clone https://github.com/DominicTWHV/Anti_Server_Scanner.git
