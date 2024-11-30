@@ -20,11 +20,6 @@ install_if_missing() {
 
 echo -e "${BLUE}Starting script...${NC}"
 
-# Update package lists
-echo -e "${BLUE}Updating package lists...${NC}"
-sudo apt-get update -qq
-echo -e "${GREEN}Package lists updated.${NC}"
-
 #check for and install required packages
 install_if_missing "ipset"
 install_if_missing "iptables"
@@ -46,10 +41,37 @@ sudo chmod +x Anti_Server_Scanner/*.sh
 echo -e "${GREEN}Permissions set.${NC}"
 
 # Copy the block.sh script
-echo -e "${YELLOW}Copying block.sh script...${NC}"
 cp Anti_Server_Scanner/block.sh block.sh
-echo -e "${GREEN}block.sh script copied.${NC}"
 
 # Execute block.sh with sudo
 echo -e "${RED}Executing block.sh...${NC}"
+echo
 sudo ./block.sh
+echo
+
+#set up systemd and reload
+echo -e "${YELLOW}Setting up a service to persist ipset rules...${NC}"
+sudo bash -c 'cat << EOF > /etc/systemd/system/ipset-restore.service
+[Unit]
+Description=restore ipset rules
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/bin/bash -c "/sbin/ipset destroy && /sbin/ipset restore < /etc/ipset.rules"
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+echo -e "${GREEN}Service file created at /etc/systemd/system/ipset-restore.service.${NC}"
+
+echo -e "${YELLOW}Reloading systemd daemon and enabling services...${NC}"
+sudo systemctl daemon-reload
+sudo systemctl enable ipset-restore.service
+sudo systemctl enable netfilter-persistent
+sudo systemctl start ipset-restore.service
+sudo systemctl start netfilter-persistent
+
+echo -e "${GREEN}Setup completed.${NC}"
