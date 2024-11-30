@@ -10,18 +10,13 @@ Make sure you have iptables and ipset installed on your system.
 You do NOT need a proxy server to use the set, however, it is required if you wish to use the main script at `Anti_Server_Scanner`
 
 ```bash
-git clone https://github.com/DominicTWHV/Anti_Server_Scanner.git
-cd Anti_Server_Scanner
 git clone https://github.com/DominicTWHV/MCIPBlocklist.git
+cd MCIPBlocklist
 sudo chmod +x *.sh
-mv MCIPBlocklist/set.txt set.txt
+sudo ./pipeline.sh
 ```
 
-**Running:**
-
-```bash
-./block.sh
-```
+The pipeline script will perform the rest of the setup.
 
 Then enter 'set.txt` when prompted for file path.
 
