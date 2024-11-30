@@ -50,20 +50,25 @@ sudo ./block.sh
 echo
 
 #set up systemd and reload
-echo -e "${YELLOW}Setting up a service to persist ipset rules...${NC}"
-sudo bash -c 'cat << EOF > /etc/systemd/system/ipset-restore.service
+if [ ! -f "$SERVICE_FILE" ]; then
+    echo -e "${YELLOW}Setting up a service to persist ipset rules...${NC}"
+    sudo bash -c 'cat << EOF > /etc/systemd/system/ipset-restore.service
 [Unit]
 Description=restore ipset rules
 After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/bin/bash -c "/sbin/ipset destroy && /sbin/ipset restore < /etc/ipset.rules"
+ExecStart=/bin/bash -c "/sbin/ipset restore < /etc/ipset.rules"
 Type=oneshot
 
 [Install]
 WantedBy=multi-user.target
 EOF'
+    echo -e "${GREEN}Service file created successfully.${NC}"
+else
+    echo -e "${BLUE}Service file already exists. Skipping creation.${NC}"
+fi
 
 echo -e "${GREEN}Service file created at /etc/systemd/system/ipset-restore.service.${NC}"
 
@@ -73,5 +78,9 @@ sudo systemctl enable ipset-restore.service
 sudo systemctl enable netfilter-persistent
 sudo systemctl start ipset-restore.service
 sudo systemctl start netfilter-persistent
+
+echo -e "${BLUE}Checking service statuses...${NC}"
+sudo systemctl status ipset-restore.service
+sudo systemctl status netfilter-persistent
 
 echo -e "${GREEN}Setup completed.${NC}"
