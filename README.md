@@ -14,6 +14,7 @@ git clone https://github.com/DominicTWHV/Anti_Server_Scanner.git
 cd Anti_Server_Scanner
 git clone https://github.com/DominicTWHV/MCIPBlocklist.git
 sudo chmod +x *.sh
+mv MCIPBlocklist/set.txt set.txt
 ```
 
 **Running:**
