@@ -3,7 +3,7 @@ A list of IPs that my own system gathered running `Anti_Server_Scanner`
 
 # To use:
 
-You do NOT need a proxy server to use the set, however, it is required if you wish to use the main script at `Anti_Server_Scanner`
+You do NOT need a proxy server to use the set. However, it is required if you wish to use the main script at `Anti_Server_Scanner`
 
 ```bash
 git clone https://github.com/DominicTWHV/MCIPBlocklist.git
